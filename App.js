@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, Text, Image, StyleSheet, ScrollView } from "react-native";
+import { View, Text, Image, StyleSheet, ScrollView, Platform } from "react-native";
 
 class App extends Component {
   render() {
@@ -9,28 +9,27 @@ class App extends Component {
         <View style={styles.item}>
           <Image 
             source={{ uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQa3RSfeoAnp5PZEXG2x2lST9dSi0vCr-bGSQ&s" }}
-            style={styles.image}
+            style={styles.imagem}
           />
-          <Text style={styles.description}>Gestão do Dinheiro</Text>
+          <Text style={[styles.descrição, styles.fonte]}>Gestão do Dinheiro</Text>
         </View>
 
-      
         <View style={styles.item}>
           <Image 
             source={{ uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQOg29XTDu7Irr4E0M7o0noIr2NSSeympkxFZeJX9dXpULohRZPcKWPATuL6J0iMFwNJFg&usqp=CAU" }}
-            style={styles.image}
+            style={styles.imagem}
           />
-          <Text style={styles.description}>Controle suas finanças! 📊💰</Text>
+          <Text style={[styles.descrição, styles.fonte]}>Controle suas finanças! 📊💰</Text>
         </View>
 
-        
         <View style={styles.item}>
           <Image 
             source={{ uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcShs5U28Hs9Z45wdRz5B-JXmuh0oS9zk1h58hfzf2JGzSL-oWMKNP-v6FfLXbtyWhUTykA&usqp=CAU" }}
-            style={styles.image}
+            style={styles.imagem}
           />
-          <Text style={styles.description}>Controle seus gastos de forma simples.</Text>
+          <Text style={[styles.descrição, styles.fonte]}>Controle seus gastos de forma simples.</Text>
         </View>
+        
       </ScrollView>
     );
   }
@@ -50,14 +49,20 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     alignItems: "center"
   },
-  image: {
+  imagem: {
     width: 300,
     height: 300,
     borderRadius: 10
   },
-  description: {
+  descrição: {
     marginTop: 10,
     fontSize: 18,
     textAlign: "center"
+  },
+  fonte: {
+    fontFamily: Platform.select({
+      android: "Inter_900Black",
+      ios: "Inter-Black",
+    })
   }
 });

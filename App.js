@@ -1,35 +1,49 @@
 import React, { Component } from "react";
-import { View, Text, Image, StyleSheet, ScrollView, Platform } from "react-native";
+import { View, Text, Image, StyleSheet, ScrollView } from "react-native";
 
 class App extends Component {
   render() {
     return (
       <ScrollView contentContainerStyle={styles.container}>
-        
         <View style={styles.item}>
           <Image 
             source={{ uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQa3RSfeoAnp5PZEXG2x2lST9dSi0vCr-bGSQ&s" }}
-            style={styles.imagem}
+            style={styles.image}
           />
-          <Text style={[styles.descrição, styles.fonte]}>Gestão do Dinheiro</Text>
+          <Text style={styles.descricao}>Gestão do Dinheiro</Text>
         </View>
 
         <View style={styles.item}>
           <Image 
             source={{ uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQOg29XTDu7Irr4E0M7o0noIr2NSSeympkxFZeJX9dXpULohRZPcKWPATuL6J0iMFwNJFg&usqp=CAU" }}
-            style={styles.imagem}
+            style={styles.image}
           />
-          <Text style={[styles.descrição, styles.fonte]}>Controle suas finanças! 📊💰</Text>
+          <Text style={styles.descricao}>Controle suas finanças! 📊💰</Text>
         </View>
 
         <View style={styles.item}>
           <Image 
             source={{ uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcShs5U28Hs9Z45wdRz5B-JXmuh0oS9zk1h58hfzf2JGzSL-oWMKNP-v6FfLXbtyWhUTykA&usqp=CAU" }}
-            style={styles.imagem}
+            style={styles.image}
           />
-          <Text style={[styles.descrição, styles.fonte]}>Controle seus gastos de forma simples.</Text>
+          <Text style={styles.descricao}>Controle seus gastos de forma simples.</Text>
         </View>
-        
+
+        <View style={styles.itemRow}>
+          <Image 
+            source={{ uri: "https://cdn-icons-png.flaticon.com/128/7132/7132294.png" }}
+            style={styles.imageesquerda}
+          />
+          <Text style={styles.descricaodireita}>Acompanhe suas despesas diárias.</Text>
+        </View>
+
+        <View style={styles.itemRow}>
+          <Image 
+            source={{ uri: "https://cdn-icons-png.flaticon.com/128/7172/7172561.png" }}
+            style={styles.imageesquerda}
+          />
+          <Text style={styles.descricaodireita}>Economize e invista com sabedoria.</Text>
+        </View>
       </ScrollView>
     );
   }
@@ -49,20 +63,34 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     alignItems: "center"
   },
-  imagem: {
+  itemRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "flex-start",
+    marginBottom: 20,
+    width: "100%"
+  },
+  image: {
     width: 300,
     height: 300,
     borderRadius: 10
   },
-  descrição: {
+  imageesquerda: {
+    width: 100,
+    height: 100,
+    borderRadius: 10,
+    marginRight: 20,
+  },
+  descricao: {
     marginTop: 10,
     fontSize: 18,
-    textAlign: "center"
+    textAlign: "center",
+    
+    fontFamily: "Inter"
   },
-  fonte: {
-    fontFamily: Platform.select({
-      android: "Inter_900Black",
-      ios: "Inter-Black",
-    })
+  descricaodireita: {
+    fontSize: 18,
+    fontFamily: "Inter",
+    flex: 1
   }
 });

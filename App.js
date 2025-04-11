@@ -1,11 +1,23 @@
 import React, { Component } from "react";
-import { View, Text, Image, StyleSheet, ScrollView, Button } from "react-native";
+import { View,Text,Image,StyleSheet,ScrollView,Button,TextInput,Switch,} from "react-native";
+import { Picker } from "@react-native-picker/picker";
+import Slider from "@react-native-community/slider";
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       mostrarMotivos: false,
+      nome: "",
+      valor: "",
+      descricao: "",
+      observacoes: "",
+      categoria: "alimentacao",
+      tipo: "fixa",
+      importancia: 50,
+      urgencia: 50,
+      essencial: false,
+      notificar: false,
     };
   }
 
@@ -16,8 +28,6 @@ class App extends Component {
   render() {
     return (
       <ScrollView contentContainerStyle={styles.container}>
-        <Text style={styles.titulo}>Meu App de Finanças 💸</Text>
-
         <View style={styles.item}>
           <Image
             source={{ uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQa3RSfeoAnp5PZEXG2x2lST9dSi0vCr-bGSQ&s" }}
@@ -58,28 +68,99 @@ class App extends Component {
           <Text style={styles.descricaodireita}>Economize e invista com sabedoria.</Text>
         </View>
 
-        <View style={styles.itemRow}>
-          <Image
-            source={{ uri: "https://cdn-icons-png.flaticon.com/128/10438/10438381.png" }}
-            style={styles.imageesquerda}
-          />
-          <Text style={styles.descricaodireita}>Controle seus custos e aumente sua rentabilidade.</Text>
-        </View>
+        <View style={styles.item}>
+          <Text style={styles.descricao}>Registre uma despesa</Text>
 
-        <View style={styles.itemRow}>
-          <Image
-            source={{ uri: "https://cdn-icons-png.flaticon.com/128/1763/1763438.png" }}
-            style={styles.imageesquerda}
+          <TextInput
+            style={styles.input}
+            placeholder="Nome"
+            value={this.state.nome}
+            onChangeText={(nome) => this.setState({ nome })}
           />
-          <Text style={styles.descricaodireita}>Tome decisões estratégicas para um crescimento sustentável.</Text>
-        </View>
 
-        <View style={styles.itemRow}>
-          <Image
-            source={{ uri: "https://cdn-icons-png.flaticon.com/128/8936/8936741.png" }}
-            style={styles.imageesquerda}
+          <TextInput
+            style={styles.input}
+            placeholder="Valor"
+            keyboardType="numeric"
+            value={this.state.valor}
+            onChangeText={(valor) => this.setState({ valor })}
           />
-          <Text style={styles.descricaodireita}>Planeje seus recursos e maximize seus lucros.</Text>
+
+          <TextInput
+            style={styles.input}
+            placeholder="Descrição"
+            value={this.state.descricao}
+            onChangeText={(descricao) => this.setState({ descricao })}
+          />
+
+          <TextInput
+            style={styles.input}
+            placeholder="Observações"
+            value={this.state.observacoes}
+            onChangeText={(observacoes) => this.setState({ observacoes })}
+          />
+
+          <Picker
+            selectedValue={this.state.categoria}
+            onValueChange={(categoria) => this.setState({ categoria })}
+            style={styles.picker}
+          >
+            <Picker.Item label="Alimentação" value="alimentacao" />
+            <Picker.Item label="Transporte" value="transporte" />
+          </Picker>
+
+          <Picker
+            selectedValue={this.state.tipo}
+            onValueChange={(tipo) => this.setState({ tipo })}
+            style={styles.picker}
+          >
+            <Picker.Item label="Fixa" value="fixa" />
+            <Picker.Item label="Variável" value="variavel" />
+          </Picker>
+
+          <Text>Importância: {this.state.importancia}</Text>
+          <Slider
+            style={styles.slider}
+            minimumValue={0}
+            maximumValue={100}
+            step={1}
+            value={this.state.importancia}
+            onValueChange={(importancia) => this.setState({ importancia })}
+          />
+
+          <Text>Urgência: {this.state.urgencia}</Text>
+          <Slider
+            style={styles.slider}
+            minimumValue={0}
+            maximumValue={100}
+            step={1}
+            value={this.state.urgencia}
+            onValueChange={(urgencia) => this.setState({ urgencia })}
+          />
+
+          <View style={styles.switchRow}>
+            <Text>Essencial</Text>
+            <Switch
+              value={this.state.essencial}
+              onValueChange={(essencial) => this.setState({ essencial })}
+            />
+          </View>
+
+          <View style={styles.switchRow}>
+            <Text>Notificar</Text>
+            <Switch
+              value={this.state.notificar}
+              onValueChange={(notificar) => this.setState({ notificar })}
+            />
+          </View>
+
+          <View style={styles.buttoncontainer}>
+            <Button title="Salvar" onPress={() => alert("Despesa salva!")} />
+          </View>
+
+          <View style={styles.buttoncontainer}>
+            <Button title="Enviar" onPress={() => alert("Dados enviados!")} />
+          </View>
         </View>
 
         <View style={styles.c}>
@@ -92,34 +173,6 @@ class App extends Component {
         {this.state.mostrarMotivos && (
           <View style={styles.extraInfoContainer}>
             <View style={styles.item}>
-              <Image
-                source={{ uri: "https://cdn-icons-png.flaticon.com/128/2583/2583250.png" }}
-                style={styles.image}
-              />
-              <Text style={styles.descricao}>
-                Nosso app ajuda você a controlar seus gastos de forma prática e intuitiva.
-                Com apenas alguns cliques, você pode registrar suas despesas e acompanhar
-                seu orçamento em tempo real, garantindo mais segurança financeira.
-              </Text>
-            </View>
-
-            <View style={styles.item}>
-              <Image
-                source={{ uri: "https://cdn-icons-png.flaticon.com/128/1046/1046405.png" }}
-                style={styles.image}
-              />
-              <Text style={styles.descricao}>
-                Acompanhe suas receitas e despesas detalhadamente. Nosso sistema categoriza
-                automaticamente os seus gastos, permitindo que você visualize onde seu dinheiro
-                está indo e faça ajustes conforme necessário.
-              </Text>
-            </View>
-
-            <View style={styles.item}>
-              <Image
-                source={{ uri: "https://cdn-icons-png.flaticon.com/128/2583/2583316.png" }}
-                style={styles.image}
-              />
               <Text style={styles.descricao}>
                 Defina metas financeiras personalizadas. Seja para economizar para uma viagem,
                 um carro novo ou uma reserva de emergência, nosso app ajuda você a alcançar seus
@@ -167,13 +220,6 @@ const styles = StyleSheet.create({
     padding: 20,
     backgroundColor: "#fff",
   },
-  titulo: {
-    fontSize: 28,
-    fontWeight: "bold",
-    marginBottom: 20,
-    textAlign: "center",
-    fontFamily: "Inter",
-  },
   item: {
     marginBottom: 20,
     alignItems: "center",
@@ -200,16 +246,39 @@ const styles = StyleSheet.create({
     marginTop: 10,
     fontSize: 18,
     textAlign: "center",
-    fontFamily: "Inter",
   },
   descricaodireita: {
     fontSize: 18,
-    fontFamily: "Inter",
     flex: 1,
+  },
+  input: {
+    borderWidth: 1,
+    borderColor: "#ccc",
+    borderRadius: 8,
+    padding: 10,
+    marginTop: 10,
+    width: "90%",
+  },
+  picker: {
+    height: 50,
+    width: "90%",
+    marginTop: 10,
+  },
+  slider: {
+    width: "90%",
+    height: 40,
+    marginTop: 10,
+  },
+  switchRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    width: "90%",
+    marginTop: 10,
   },
   buttoncontainer: {
     marginTop: 20,
-    width: "80%",
+    width: "90%",
   },
   extraInfoContainer: {
     marginTop: 20,
